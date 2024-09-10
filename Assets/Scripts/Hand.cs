@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Hand : MonoBehaviour
 {
     [Header("References")]
     public Deck deck;
+    public TextMeshProUGUI deckValueText;
     public GameObject cardPrefab;
 
     private int handValue;
@@ -15,14 +17,11 @@ public class Hand : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameObjectHand = new List<GameObject>();
+
         ResetHand();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void ResetHand()
     {
@@ -37,6 +36,7 @@ public class Hand : MonoBehaviour
         gameObjectHand = new List<GameObject>();
     }
 
+
     public void DrawCard()
     {
         GameObject currentCard;
@@ -50,10 +50,39 @@ public class Hand : MonoBehaviour
         currentCard.transform.localScale = Vector3.one;
 
         gameObjectHand.Add(currentCard);
+
+        FindAndSetHandValue();
     }
+
 
     public void FindAndSetHandValue()
     {
+        handValue = 0;
 
+        for (int i = 0; i < hand.Count; i++)
+        {
+            int cardValue = hand[i].number;
+
+            if (cardValue > 10)
+                cardValue = 10;
+
+            if (cardValue != 1)
+                handValue += cardValue;
+        }
+
+        for (int i = 0; i < hand.Count; i++)
+        {
+            int cardValue = hand[i].number;
+
+            if (cardValue == 1)
+            {
+                if (handValue <= 10)
+                    cardValue = 11;
+
+                handValue += cardValue;
+            }
+        }
+
+        deckValueText.text = "Hand Value: " + handValue;
     }
 }

@@ -12,9 +12,6 @@ public class Deck : MonoBehaviour
     {
         BuildDeck();
         ShuffleDeck();
-
-        for (int x = 0; x < deck.Count; x++)
-            deck[x].DebugShowCard();
     }
 
 
