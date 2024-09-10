@@ -15,12 +15,14 @@ public static class CardDataType
 
     public struct Card
     {
+        public bool faceUp;
         public int number;
         public Suit suit;
         public string suitName;
 
         public Card(int number = 1, Suit suit = Suit.Hearts)
         {
+            faceUp = false;
             this.number = number;
             this.suit = suit;
 
