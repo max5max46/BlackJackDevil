@@ -21,8 +21,6 @@ public class Hand : MonoBehaviour
     void Awake()
     {
         gameObjectHand = new List<GameObject>();
-
-        ResetHand();
     }
 
 
@@ -87,7 +85,10 @@ public class Hand : MonoBehaviour
         }
 
         if (isPlayer)
+        {
             deckValueText.text = "Hand Value: " + handValue;
+            Debug.Log("Players Hand Value: " + handValue);
+        }
         else
             Debug.Log("Devils Hand Value: " + handValue);
     }

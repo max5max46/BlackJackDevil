@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class BlackJackManager : MonoBehaviour
 {
     [Header("References")]
+    public Deck deck;
     public Hand playerHand;
     public Hand devilHand;
     public UnityEngine.UI.Button hitButton;
@@ -25,11 +26,18 @@ public class BlackJackManager : MonoBehaviour
 
     public void StartRound()
     {
-        amountOfStands = 0;
-
         hitButton.interactable = false;
         standButton.interactable = false;
 
+        amountOfStands = 0;
+
+        // Resets all cards
+        deck.BuildDeck();
+        deck.ShuffleDeck();
+        playerHand.ResetHand();
+        devilHand.ResetHand();
+
+        // Adds the first 2 cards to hand
         playerHand.DrawCard();
         devilHand.DrawCard();
         playerHand.DrawCard();
@@ -111,6 +119,8 @@ public class BlackJackManager : MonoBehaviour
             return;
         }
 
+        amountOfStands = 0;
+
         hitButton.interactable = true;
         standButton.interactable = true;
     }
@@ -124,5 +134,7 @@ public class BlackJackManager : MonoBehaviour
 
         hitButton.interactable = false;
         standButton.interactable = false;
+
+        StartRound();
     }
 }
