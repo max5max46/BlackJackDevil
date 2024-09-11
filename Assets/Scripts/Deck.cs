@@ -8,7 +8,7 @@ public class Deck : MonoBehaviour
     private List<CardDataType.Card> deck;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         BuildDeck();
         ShuffleDeck();

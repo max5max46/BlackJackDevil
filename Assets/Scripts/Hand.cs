@@ -10,12 +10,15 @@ public class Hand : MonoBehaviour
     public TextMeshProUGUI deckValueText;
     public GameObject cardPrefab;
 
-    private int handValue;
+    [Header("Properties")]
+    [SerializeField] private bool isPlayer = true;
+
+    [HideInInspector] public int handValue;
     private List<CardDataType.Card> hand;
     private List<GameObject> gameObjectHand;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         gameObjectHand = new List<GameObject>();
 
@@ -83,6 +86,9 @@ public class Hand : MonoBehaviour
             }
         }
 
-        deckValueText.text = "Hand Value: " + handValue;
+        if (isPlayer)
+            deckValueText.text = "Hand Value: " + handValue;
+        else
+            Debug.Log("Devils Hand Value: " + handValue);
     }
 }
